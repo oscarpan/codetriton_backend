@@ -16,7 +16,6 @@ class CreateFBUsersTable extends Migration
             $table->bigInteger('id')->unsigned()->primary();
             $table->string('name');
             $table->string('email');
-            $table->string('image');
             $table->text('details');
             $table->integer('points')->default(1000);
             $table->timestamps();
