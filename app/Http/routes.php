@@ -56,6 +56,17 @@ Route::group(['prefix' => 'api'], function () {
         return response()->json($message);
     });
 
+    Route::post('updateGuestRating', function(Request $request){
+        $match = Match::find($request->get('match_id'));
+        $match->guest_rating = $request->get('guest_rating');
+        return response()->json($match);
+    });
+    Route::post('updateHostRating', function(Request $request){
+        $match = Match::find($request->get('match_id'));
+        $match->host_rating = $request->get('host_rating');
+        return response()->json($match);
+    });
+
     Route::get('offer/{offerid}/{userid}', function($offerid, $userid){
         $offer = Offer::find($offerid);
 
