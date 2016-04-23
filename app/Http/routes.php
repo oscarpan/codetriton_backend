@@ -1,16 +1,34 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+use App\FBUser;
+use App\Match;
+use App\Message;
+use App\Offer;
+
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::group(['prefix' => 'api'], function () {
+
+    Route::get('gameinfo', function(){
+
+//        return response()->json($data);
+    });
+
+    Route::post('userLogin', function(Request $request){
+        $user = FBUser::find($request->id);
+        if(!$user){
+            $user = FBUser::create($request->all());
+        }
+        return response()->json($user);
+    });
+
+//    Route::post('submitscore', function(Request $request){
+//        \App\Score::create($request->all());
+//        return response()->json(\App\Score::where('level_id', '=', $request->get('level_id'))->get()->sortByDesc('score')->take(5)->toArray());
+//    });
 });

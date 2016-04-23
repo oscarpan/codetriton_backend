@@ -15,6 +15,7 @@ class CreateFBUsersTable extends Migration
         Schema::create('f_b_users', function (Blueprint $table) {
             $table->integer('id')->unsigned()->primary();
             $table->string('name');
+            $table->string('email');
             $table->text('details');
             $table->integer('points');
             $table->timestamps();
