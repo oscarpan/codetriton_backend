@@ -21,7 +21,8 @@ class CreateMatchesTable extends Migration
             $table->bigInteger('guest_id')->unsigned();
             $table->foreign('guest_id')->references('id')->on('f_b_users');
             $table->boolean('approval');
-            $table->integer('rating');
+            $table->integer('host_rating');
+            $table->integer('guest_rating');
             $table->timestamps();
         });
     }

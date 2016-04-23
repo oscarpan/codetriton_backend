@@ -15,13 +15,31 @@ Route::get('/', function () {
 Route::group(['prefix' => 'api'], function () {
 
     Route::get('offers', function(){
-        $offers = Offer::with('user')->get();
+        $offers = Offer::with('user')->with('matches')->get();
         return response()->json($offers);
     });
 
     Route::post('createOffer', function(Request $request){
         $offer = Offer::create($request->all());
         return response()->json($offer);
+    });
+
+    Route::post('createMatch', function(Request $request){
+        $match = Match::create($request->all());
+        return response()->json($match);
+    });
+
+    Route::get('offer/{offerid}/{userid}', function($offerid, $userid){
+        $offer = Offer::find($offerid);
+
+        $match = Match::where('offerid', '=', $offerid)->where('');
+
+        $data = [
+            'offer' => $offer->toArray(),
+            ''
+        ];
+
+        return response()->json($data);
     });
 
     Route::post('userLogin', function(Request $request){
