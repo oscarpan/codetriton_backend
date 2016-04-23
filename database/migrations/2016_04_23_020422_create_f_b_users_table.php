@@ -17,7 +17,7 @@ class CreateFBUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->text('details');
-            $table->integer('points');
+            $table->integer('points')->default(1000);
             $table->timestamps();
         });
     }
