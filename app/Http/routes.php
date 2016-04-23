@@ -14,6 +14,10 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'api'], function () {
 
+    Route::get('users', function(){
+        return response()->json(FBUser::all());
+    });
+
     Route::get('offers', function(){
         $offers = Offer::with('user')->with('matches')->get();
         return response()->json($offers);
@@ -22,6 +26,11 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('createOffer', function(Request $request){
         $offer = Offer::create($request->all());
         return response()->json($offer);
+    });
+
+    Route::get('match/{matchid}', function($matchid){
+        $match = Match::with('messages')->find($matchid);
+        return response()->json($match);
     });
 
     Route::get('matches/{userid}', function($userid){
@@ -36,6 +45,11 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('createMatch', function(Request $request){
         $match = Match::create($request->all());
         return response()->json($match);
+    });
+
+    Route::post('createMessage', function(Request $request){
+        $message = Message::create($request->all());
+        return response()->json($message);
     });
 
     Route::get('offer/{offerid}/{userid}', function($offerid, $userid){
