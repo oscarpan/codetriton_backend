@@ -14,16 +14,23 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'api'], function () {
 
-    Route::get('gameinfo', function(){
+    Route::get('offers', function(){
+        $offers = Offer::with('user')->get();
+        return response()->json($offers);
+    });
 
-//        return response()->json($data);
+    Route::post('createOffer', function(Request $request){
+        $offer = Offer::create($request->all());
+        return response()->json($offer);
     });
 
     Route::post('userLogin', function(Request $request){
-        $user = FBUser::find($request->id);
-        if(!$user){
+        $user = FBUser::find($request->get('id'));
+
+        if($user == NULL){
             $user = FBUser::create($request->all());
         }
+
         return response()->json($user);
     });
 

@@ -16,9 +16,9 @@ class CreateMatchesTable extends Migration
             $table->increments('id');
             $table->integer('offer_id')->unsigned();
             $table->foreign('offer_id')->references('id')->on('offers');
-            $table->integer('host_id')->unsigned();
+            $table->bigInteger('host_id')->unsigned();
             $table->foreign('host_id')->references('id')->on('f_b_users');
-            $table->integer('guest_id')->unsigned();
+            $table->bigInteger('guest_id')->unsigned();
             $table->foreign('guest_id')->references('id')->on('f_b_users');
             $table->boolean('approval');
             $table->integer('rating');

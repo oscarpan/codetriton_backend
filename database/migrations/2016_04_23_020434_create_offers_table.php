@@ -14,7 +14,7 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('f_b_user_id')->unsigned();
+            $table->bigInteger('f_b_user_id')->unsigned();
             $table->foreign('f_b_user_id')->references('id')->on('f_b_users');
             $table->string('food');
             $table->dateTime('time');
