@@ -24,6 +24,15 @@ Route::group(['prefix' => 'api'], function () {
         return response()->json($offer);
     });
 
+    Route::get('matches/{userid}', function($userid){
+        $user = FBUser::find($userid);
+        $data = [
+            'guest_matches' => $user->guest_matches()->toArray(),
+            'host_matches' => $user->host_matches()->toArray()
+        ];
+        return response()->json($data);
+    });
+
     Route::post('createMatch', function(Request $request){
         $match = Match::create($request->all());
         return response()->json($match);
