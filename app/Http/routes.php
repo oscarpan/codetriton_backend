@@ -44,6 +44,10 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::post('createMatch', function(Request $request){
         $match = Match::create($request->all());
+        $offer = Offer::find($request->get('offer_id'));
+        $user = FBUser::find($request->get('guest_id'));
+        $user->decrement('points', $offer->points);
+        $user->save();
         return response()->json($match);
     });
 
