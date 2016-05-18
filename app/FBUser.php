@@ -8,12 +8,15 @@ class FBUser extends Model
 {
     protected $guarded = [];
 
-    protected $appends = ['guest_rating','host_rating'];
+    protected $appends = ['guest_rating', 'host_rating'];
 
-    public function guest_matches(){
+    public function guest_matches()
+    {
         return $this->hasMany('App\Match', 'guest_id');
     }
-    public function host_matches(){
+
+    public function host_matches()
+    {
         return $this->hasMany('App\Match', 'host_id');
     }
 
